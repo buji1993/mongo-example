@@ -1,0 +1,28 @@
+{
+  "name": "mongo-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buji1993/mongo-example.git"
+  },
+  "keywords": [
+    "node",
+    "mongo"
+  ],
+  "author": "buji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/buji1993/mongo-example/issues"
+  },
+  "homepage": "https://github.com/buji1993/mongo-example#readme",
+  "dependencies": {
+    "koa": "^2.3.0",
+    "koa-router": "^7.2.1",
+    "mongoose": "^4.11.13"
+  }
+}
