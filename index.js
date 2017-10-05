@@ -6,24 +6,22 @@ const Router = require('koa-router');
 
 const Dog = require('./lib/models/dog');
 
-mongoose.createConnection('localhost', 'test');
+mongoose.Promise = global.Promise;
+
+mongoose.connect('mongodb://localhost/test', {
+    useMongoClient: true
+});
 
 const app = new Koa();
 const router = new Router();
 
-router.get('/query', (ctx, next) => {
-    const callback = ctx => {
-        if (error) {
-            console.log('query error');
-        }
-        console.log(data);
-        ctx.response.type = 'json';
-        ctx.response.body = data;
-    }
-    Dog.find({}, 'name age', callback);
+router.get('/query', async ctx => {
+    const data = await Dog.find({}, 'name age').exec();
+    console.log(data);
+    ctx.response.body = JSON.stringify(data);
 });
 
-router.get('/add', ctx => {
+router.get('/add', async ctx => {
     const query = ctx.query;
     if (!query.name) {
         return ctx.response.body = 'need name';
@@ -37,10 +35,15 @@ router.get('/add', ctx => {
         age: query.age
     });
 
-    record.save();
+    await record.save();
     ctx.response.body = 'saved';
+
 });
 
 app.use(router.routes()).use(router.allowedMethods());
+
+app.use(ctx => {
+    console.log(ctx.response.body);
+});
 
 app.listen(7001);
