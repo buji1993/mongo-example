@@ -18,6 +18,7 @@ const router = new Router();
 router.get('/query', async ctx => {
     const data = await Dog.find({}, 'name age').exec();
     console.log(data);
+    ctx.response.type = 'json';
     ctx.response.body = JSON.stringify(data);
 });
 
@@ -40,10 +41,8 @@ router.get('/add', async ctx => {
 
 });
 
-app.use(router.routes()).use(router.allowedMethods());
 
-app.use(ctx => {
-    console.log(ctx.response.body);
-});
+
+app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(7001);
