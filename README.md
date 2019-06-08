@@ -1,4 +1,7 @@
 # mongo-example
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/ah-yu/mongo-example.svg)](https://greenkeeper.io/)
+
 a simple example for mongoose and koa
 
 ## Install
